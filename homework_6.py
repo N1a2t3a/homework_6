@@ -2,6 +2,9 @@ import sys
 import os
 import shutil
 
+# коментар
+
+
 def normalize(filename):
     normalized_filename = filename.replace(" ", "_")
     return normalized_filename
@@ -16,13 +19,15 @@ def process_folder(folder_path):
     }
 
     # Отримання поточної директорії, з якої запускається скрипт
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    script_dir = os.path.abspath(folder_path)
+
 
     # Створення папок images та documents у поточній директорії
     for folder in ['images', 'documents']:
-        folder_path = os.path.join(script_dir, folder)
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
+        target_folder_path = os.path.join(script_dir, folder)
+        if not os.path.exists(target_folder_path):
+            os.makedirs(target_folder_path)
+
 
     # Створення папки archives у поточній директорії
     archives_folder = os.path.join(script_dir, 'archives')
@@ -113,3 +118,4 @@ if __name__ == "__main__":
     folder_path = sys.argv[1]
     report = process_folder(folder_path)
     print(report)
+
