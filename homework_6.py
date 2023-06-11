@@ -12,11 +12,13 @@ def normalize(filename):
 def process_folder(folder_path):
     ignored_folders = ['archives', 'video', 'audio', 'documents', 'images']
     extensions = {
-        'images': ['JPEG', 'PNG', 'JPG', 'SVG'],
-        'videos': ['AVI', 'MP4', 'MOV', 'MKV'],
-        'documents': ['DOC', 'DOCX', 'TXT', 'PDF', 'XLSX', 'PPTX'],
-        'music': ['MP3', 'OGG', 'WAV', 'AMR']
+    'images': ['JPEG', 'PNG', 'JPG', 'SVG'],
+    'videos': ['AVI', 'MP4', 'MOV', 'MKV'],
+    'documents': ['DOC', 'DOCX', 'TXT', 'PDF', 'XLSX', 'PPTX'],
+    'music': ['MP3', 'OGG', 'WAV', 'AMR'],
+    'archives': ['ZIP', 'RAR', '7Z']  
     }
+
 
     # Отримання поточної директорії, з якої запускається скрипт
     script_dir = os.path.abspath(folder_path)
@@ -44,7 +46,7 @@ def process_folder(folder_path):
 
         moved = False
 
-        if file_extension in extensions['archives']:
+        if file_extension in extensions.get('archives', []):
             # Обробка архівів
             dest_folder = os.path.join(archives_folder, os.path.splitext(normalized_filename)[0])
             if not os.path.exists(dest_folder):
